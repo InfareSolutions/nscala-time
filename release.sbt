@@ -39,13 +39,6 @@ releaseProcess := Seq[ReleaseStep](
   commitReleaseVersion,
   updateReadmeProcess,
   tagRelease,
-  ReleaseStep(
-    action = { state =>
-      val extracted = Project extract state
-      extracted.runAggregated(PgpKeys.publishSigned in Global in extracted.get(thisProjectRef), state)
-    },
-    enableCrossBuild = true
-  ),
   setNextVersion,
   commitNextVersion,
   updateReadmeProcess,
