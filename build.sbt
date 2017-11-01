@@ -10,7 +10,7 @@ val Scala210 = "2.10.6"
 scalaVersion := Scala210
 
 // sbt "release cross"
-crossScalaVersions := Seq(Scala210, "2.11.8", "2.12.2")
+crossScalaVersions := Seq(Scala210, "2.11.8")
 
 val unusedWarnings = "-Ywarn-unused" :: "-Ywarn-unused-import" :: Nil
 
@@ -86,4 +86,4 @@ val host = "52.211.143.40"
 credentials += Credentials("Sonatype Nexus Repository Manager",
   host, "admin", "Quar9s")
 
-publishTo := Some("Sonatype Nexus" at "http://52.211.143.40:8081/repository/maven-releases")
+publishTo := Some("Sonatype Nexus" at "http://" + host + ":8081/repository/maven-releases")
