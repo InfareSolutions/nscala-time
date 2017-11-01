@@ -28,8 +28,6 @@ val updateReadme: State => State = { state =>
 
 commands += Command.command("updateReadme")(updateReadme)
 
-val updateReadmeProcess: ReleaseStep = updateReadme
-
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
@@ -37,11 +35,9 @@ releaseProcess := Seq[ReleaseStep](
   runTest,
   setReleaseVersion,
   commitReleaseVersion,
-  updateReadmeProcess,
   tagRelease,
   setNextVersion,
   commitNextVersion,
-  updateReadmeProcess,
   releaseStepCommand("sonatypeReleaseAll"),
   pushChanges
 )
