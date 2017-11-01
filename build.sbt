@@ -1,7 +1,5 @@
 
-organization := "com.github.nscala-time"
-
-sonatypeProfileName := "com.github.nscala-time"
+organization := "com.infare"
 
 name := "nscala-time"
 
@@ -12,7 +10,7 @@ val Scala210 = "2.10.6"
 scalaVersion := Scala210
 
 // sbt "release cross"
-crossScalaVersions := Seq("2.11.8")
+crossScalaVersions := Seq("2.11.8", "2.12.2")
 
 val unusedWarnings = "-Ywarn-unused" :: "-Ywarn-unused-import" :: Nil
 
@@ -83,20 +81,9 @@ pomExtra := (
   </developers>
 )
 
-credentials ++= {
-  val sonatype = ("Sonatype Nexus Repository Manager", "oss.sonatype.org")
-  def loadMavenCredentials(file: java.io.File) : Seq[Credentials] = {
-    xml.XML.loadFile(file) \ "servers" \ "server" map (s => {
-      val host = (s \ "id").text
-      val realm = if (host == sonatype._2) sonatype._1 else "Unknown"
-      Credentials(realm, host, (s \ "username").text, (s \ "password").text)
-    })
-  }
-  val ivyCredentials   = Path.userHome / ".ivy2" / ".credentials"
-  val mavenCredentials = Path.userHome / ".m2"   / "settings.xml"
-  (ivyCredentials.asFile, mavenCredentials.asFile) match {
-    case (ivy, _) if ivy.canRead => Credentials(ivy) :: Nil
-    case (_, mvn) if mvn.canRead => loadMavenCredentials(mvn)
-    case _ => Nil
-  }
-}
+val host = "52.211.143.40"
+
+credentials += Credentials("Sonatype Nexus Repository Manager",
+  host, "admin", "Quar9s")
+
+publishTo := Some("Sonatype Nexus" at "http://" + host + ":8081/repository/maven-releases")
