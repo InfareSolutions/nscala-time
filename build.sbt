@@ -39,7 +39,7 @@ scalacOptions in (Compile, doc) ++= {
 
 libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.9.9",
-  "org.joda" % "joda-convert" % "1.2"
+  "org.joda" % "joda-convert" % "1.8.2"
 )
 
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.5" % "test"
